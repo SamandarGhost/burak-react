@@ -7,10 +7,9 @@ import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import "../../css/home.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from "@reduxjs-toolkit";
 import { setPopularDishes } from './slice'; 
 import { retrievevPopularDishes } from './selector';
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector, Dispatch } from '@reduxjs/toolkit';
 import { Product } from '../../lib/types/product';
 
 /* REDUX SLICE & SELECTOR */
