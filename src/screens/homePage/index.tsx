@@ -17,9 +17,10 @@ import { ProductCollection } from '../../lib/enums/product.enum';
 /* REDUX SLICE */
 const actionDispatch = (dispatch: Dispatch) => ({
     setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
+    setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
 });
 export default function HomePage() {
-  const { setPopularDishes } = actionDispatch(useDispatch());
+  const { setPopularDishes, setNewDishes } = actionDispatch(useDispatch());
   
     useEffect(() => {
         // Backend server data fetch => Data
