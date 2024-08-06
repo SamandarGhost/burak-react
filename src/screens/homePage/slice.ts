@@ -10,17 +10,13 @@ const initialState: HomePageState = {
 const homePageSlice = createSlice({
     name: "homePage",
     initialState,
-    // @ts-ignore
-    reducer: {
-        // @ts-ignore
+    reducers: {
         setPopularDishes: (state, action) => {
             state.popularDishes = action.payload;
         },
-        // @ts-ignore
         setNewDishes: (state, action) => {
             state.newDishes = action.payload;
         },
-        // @ts-ignore
         setTopUsers: (state, action) => {
             state.topUsers = action.payload;
         },

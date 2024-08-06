@@ -7,25 +7,45 @@ import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import "../../css/home.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { setPopularDishes } from './slice'; 
+import { setNewDishes, setPopularDishes } from './slice'; 
 import { retrievevPopularDishes } from './selector';
 import { createSelector, Dispatch } from '@reduxjs/toolkit';
 import { Product } from '../../lib/types/product';
+import ProductService from '../../app/services/ProductService';
+import { ProductCollection } from '../../lib/enums/product.enum';
 
-/* REDUX SLICE & SELECTOR */
+/* REDUX SLICE */
 const actionDispatch = (dispatch: Dispatch) => ({
     setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
-const popularDishesRetriever = createSelector(
-    retrievevPopularDishes,
-    (popularDishes) => ({popularDishes})
-);
 export default function HomePage() {
-    // Selector: Store => Data -> datalarni componentda ishlatish
-  const { setPopularDishes} = actionDispatch(useDispatch());
-  const {popularDishes} = useSelector(popularDishesRetriever)
+  const { setPopularDishes } = actionDispatch(useDispatch());
+  
+    useEffect(() => {
+        // Backend server data fetch => Data
+        const product = new ProductService();
+        product.getProducts({
+            page: 1,
+            limit: 4,
+            order: "productViews",
+            productCollection: ProductCollection.DISH,
+        })
+        .then(data => {
+            console.log("data passed here");
+            setPopularDishes(data);
+        }).catch((err) => console.log(err));
 
-    useEffect(() => {}, [])
+        product.getProducts({
+            page: 1,
+            limit: 4,
+            order: "createdAt",
+            productCollection: ProductCollection.DISH,
+        })
+        .then(data => {
+            console.log("data passed here");
+            setNewDishes(data);
+        }).catch((err) => console.log(err));
+    }, [])
 
     return (<div className={"homepage"}>
         <Statistics />
