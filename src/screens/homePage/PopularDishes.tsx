@@ -11,13 +11,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DescriptionOutlined  from '@mui/icons-material/DescriptionOutlined';
 import { createSelector } from '@reduxjs/toolkit';
 import { Product } from '../../lib/types/product';
-import { retrievevPopularDishes } from './selector';
+import { retrievePopularDishes } from './selector';
 import { useSelector } from 'react-redux';
 import { serverApi } from '../../lib/config';
 
 /* REDUX SELECTOR */
 const popularDishesRetriever = createSelector(
-    retrievevPopularDishes,
+    retrievePopularDishes,
     (popularDishes) => ({popularDishes})
 );
 

@@ -5,12 +5,12 @@ import HomePage from ".";
 
  const selectHomePage = (state: AppRootState) => state.homePage;
 
- export const retrievevPopularDishes = createSelector(
+ export const retrievePopularDishes = createSelector(
     selectHomePage,
     (HomePage) => HomePage.popularDishes
  );
 
- export const retrievevNewDishes = createSelector(
+ export const retrieveNewDishes = createSelector(
     selectHomePage,
     (HomePage) => HomePage.newDishes
  );

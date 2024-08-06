@@ -9,7 +9,7 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Divider from "../../app/components/divider"
 import { createSelector } from '@reduxjs/toolkit';
-import { retrievevNewDishes } from './selector';
+import { retrieveNewDishes } from './selector';
 import { useSelector } from 'react-redux';
 import { serverApi } from '../../lib/config';
 import { Product } from '../../lib/types/product';
@@ -17,7 +17,7 @@ import { ProductCollection } from '../../lib/enums/product.enum';
 
 /* REDUX SELECTOR */
 const newDishesRetriever = createSelector(
-    retrievevNewDishes,
+    retrieveNewDishes,
     (newDishes) => ({newDishes})
 );
 
