@@ -12,7 +12,7 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import "../../css/products.css";
 import { setChoosenProduct, setRestaurant } from "./slice";
-import { retrievevChoosenProduct, retrievevRestaurant } from "./selector";
+import { retrieveChoosenProduct, retrieveRestaurant } from "./selector";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { Product } from "../../lib/types/product";
 import { Member } from "../../lib/types/member";
@@ -22,10 +22,10 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setRestaurant: (data: Member[]) => dispatch(setRestaurant(data)),
   setChoosenProduct: (data: Product[]) => dispatch(setChoosenProduct(data)),
 });
-const choosenProductRetriever = createSelector(retrievevChoosenProduct, (chosenProduct) => ({
+const choosenProductRetriever = createSelector(retrieveChoosenProduct, (chosenProduct) => ({
   chosenProduct,
 }));
-const restaurantRetriever = createSelector(retrievevRestaurant, (restaurant) => ({
+const restaurantRetriever = createSelector(retrieveRestaurant, (restaurant) => ({
   restaurant,
 }));
 

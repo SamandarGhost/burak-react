@@ -4,17 +4,17 @@ import ProductsPage from ".";
 
  const selectProductsPage = (state: AppRootState ) => state.productsPage;
 
- export const retrievevRestaurant = createSelector(
+ export const retrieveRestaurant = createSelector(
     selectProductsPage,
     (ProductsPage) => ProductsPage.restaurant
  );
 
- export const retrievevChoosenProduct = createSelector(
+ export const retrieveChoosenProduct = createSelector(
     selectProductsPage,
     (ProductsPage) => ProductsPage.choosenProduct
  );
 
- export const retrievevProducts = createSelector(
+ export const retrieveProducts = createSelector(
     selectProductsPage,
     (ProductsPage) => ProductsPage.products
  );
