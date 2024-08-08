@@ -51,7 +51,7 @@ export default function Products() {
             productSearch.search = "";
             setProductSearch({ ...productSearch });
         }
-    });
+    }, []);
 
     const history = useHistory();
 
