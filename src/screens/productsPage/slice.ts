@@ -3,7 +3,7 @@ import { ProductsPageState } from "../../lib/types/screen";
 
 
 const initialState: ProductsPageState = {
-    restaurant:null,
+    restaurant: null,
     choosenProduct: null,
     products: [],
 };
