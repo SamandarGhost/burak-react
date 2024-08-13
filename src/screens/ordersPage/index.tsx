@@ -9,10 +9,21 @@ import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import "../../css/order.css";
+import { Order } from "../../lib/types/order";
+import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
+  setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
+  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
+});
 
 
 
 export default function OrdersPage() {
+  const {setPausedOrders, setProcessOrders, setFinishedOrders} = actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
