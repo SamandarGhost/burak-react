@@ -62,7 +62,7 @@ const finishedOrderHandler = async (e: T) => {
                     return(
                         <Box key={order._id} className={"order-main-box"}>
                             <Box className={"order-box-scroll"}>
-                                {order.orderItems.map((item: OrderItem) => {
+                                {order?.orderItems?.map((item: OrderItem) => {
                                     const product: Product = order.productData.filter(
                                         (ele: Product) => item.productId === ele._id
                                     )[0];
