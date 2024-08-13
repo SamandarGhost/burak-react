@@ -8,13 +8,15 @@ import PauseOrders from "./PauseOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import "../../css/order.css";
 import { Order, OrderInquiry } from "../../lib/types/order";
 import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { OrderStatus } from "../../lib/enums/order.enum";
 import OrderService from "../../app/services/OrderService";
+import { useGlobals } from "../../app/hooks/useGlobals";
+import "../../css/order.css";
+
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
@@ -26,6 +28,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
 
 export default function OrdersPage() {
   const {setPausedOrders, setProcessOrders, setFinishedOrders} = actionDispatch(useDispatch());
+  const {orderBuilder} = useGlobals();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -40,7 +43,7 @@ export default function OrdersPage() {
     order.getMyOrders({...orderInquiry, orderStatus: OrderStatus.FINISH}).then((data) => setFinishedOrders(data)).catch((err) => console.log(err));
 
 
-  }, [orderInquiry]);
+  }, [orderInquiry, orderBuilder]);
 
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
@@ -66,8 +69,8 @@ export default function OrdersPage() {
               </Box>
             </Box>
             <Stack className={"order-main-context"}>
-              <PauseOrders />
-              <ProcessOrders />
+              <PauseOrders setValue={setValue} />
+              <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
           </TabContext>

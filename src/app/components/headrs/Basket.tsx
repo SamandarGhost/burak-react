@@ -9,7 +9,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import { Messages, serverApi } from "../../../lib/config";
-import { on } from "process";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
@@ -24,7 +23,7 @@ interface BasketPorps {
 
 export default function Basket(props: BasketPorps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  const authMember = useGlobals();
+  const {authMember, setOrderBuilder} = useGlobals();
   const history = useHistory();
   const itemsPrice = cartItems.reduce((a: number, c: CartItem) => a + c.quantity * c.price, 0 );
 
@@ -51,6 +50,7 @@ export default function Basket(props: BasketPorps) {
       await order.createOrder(cartItems);
 
       onDeleteAll();
+      setOrderBuilder( new Date());
 
       history.push("/orders");
 

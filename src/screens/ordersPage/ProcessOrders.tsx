@@ -6,9 +6,14 @@ import moment from "moment";
 import { createSelector } from "@reduxjs/toolkit";
 import { retrieveProcessOrders } from "./selector";
 import { useSelector } from "react-redux";
-import { Order, OrderItem } from "../../lib/types/order";
+import { Order, OrderItem, OrderUpdateInput } from "../../lib/types/order";
 import { Product } from "../../lib/types/product";
-import { serverApi } from "../../lib/config";
+import { Messages, serverApi } from "../../lib/config";
+import { useGlobals } from "../../app/hooks/useGlobals";
+import { OrderStatus } from "../../lib/enums/order.enum";
+import OrderService from "../../app/services/OrderService";
+import { T } from "../../lib/types/common";
+import { sweetErrorHandling } from "../../lib/sweetAlert";
 
 //** Redux Selector */
 const processOrdersRetriever = createSelector(
@@ -16,9 +21,38 @@ const processOrdersRetriever = createSelector(
     (processOrders) => ({processOrders})
 );
 
+interface ProcessOrdersProps {
+    setValue: (input: string) => void;
+}
 
-export default function ProcessOrders() {
-const {processOrders} = useSelector(processOrdersRetriever);
+export default function ProcessOrders(props: ProcessOrdersProps) {
+    const {setValue} = props;
+    const {authMember, setOrderBuilder} = useGlobals();
+    const {processOrders} = useSelector(processOrdersRetriever);
+
+const finishedOrderHandler = async (e: T) => {
+    try {
+        if(!authMember) throw new Error(Messages.error2);
+        // Payment Process
+        const orderId = e.target.value;
+        const input: OrderUpdateInput = {
+            orderId: orderId,
+            orderStatus: OrderStatus.FINISH,
+        };
+
+        const confirmation = window.confirm("Have you received your order?");
+        if(confirmation) {
+            const order = new OrderService();
+            await order.updateOrder(input);
+            setValue("3");
+            setOrderBuilder( new Date());
+        }
+
+    } catch(err) {
+        console.log(err);
+        sweetErrorHandling(err).then();
+    }
+};
 
     return(
         <TabPanel value={"2"}>
@@ -66,7 +100,7 @@ const {processOrders} = useSelector(processOrdersRetriever);
                                 <p className={"data-compl"}>
                                     {moment().format("YY-MM-DD HH:mm")}
                                 </p>
-                                <Button variant="contained" className={"verify-button"}>
+                                <Button value={order._id} variant="contained" className={"verify-button"} onClick={finishedOrderHandler}>
                                     Verify to Fulfil
                                 </Button>
                             </Box>

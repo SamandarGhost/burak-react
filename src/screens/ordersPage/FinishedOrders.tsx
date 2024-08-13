@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Stack } from "@mui/material";
-import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
 import { createSelector } from "@reduxjs/toolkit";
 import { retrieveFinishedOrders } from "./selector";
@@ -66,13 +65,13 @@ const {finishedOrders} = useSelector(finishedOrdersRetriever);
                     )
                 })}
 
-                {false && (
+                {!finishedOrders || (finishedOrders.length === 0 && (
                     <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
                         <img 
                           src={"/icons/noimage-list.svg"}
                           style={{width: 300, height: 300}} />
                     </Box>
-                )}
+                ))}
             </Stack>
         </TabPanel>
     );
