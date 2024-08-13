@@ -98,7 +98,7 @@ const processOrderHandler = async (e: T) => {
                                             <img 
                                               src={imagePath}
                                               className={"order-dish-img"}  />
-                                              <p className={"title-dish"}>{product.productName}</p>
+                                              <p className={"title-dish"}>{product?.productName}</p>
                                               <Box className={"price-box"}>
                                                 <p>${item.itemPrice}</p>
                                                 <img src={"/icons/close.svg"}/>
@@ -134,7 +134,7 @@ const processOrderHandler = async (e: T) => {
                     )
                 })}
 
-                {!pausedOrders || (pausedOrders.length === 0 && (
+                {!pausedOrders || (pausedOrders?.length === 0 && (
                     <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
                         <img 
                           src={"/icons/noimage-list.svg"}
