@@ -4,6 +4,7 @@ import Basket from "./Basket";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { Logout } from "@mui/icons-material";
+import { serverApi } from "../../../lib/config";
 
 interface OtherNavbarProps {
     cartItems: CartItem[];
@@ -78,7 +79,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                             Login
                     </Button>
                     </Box>) : (<img className="user-avatar"
-                    src={"/icons/default-user.svg"}
+                     src={ authMember?.memberImage ? `${serverApi}/${authMember.memberImage}` : "/icons/default-user.svg"}
                     aria-haspaup={"true"} 
                     onClick={handleLogoutClick}
                     />)}

@@ -40,11 +40,13 @@ function App() {
     try {
       const member = new MemberService();
       await member.logout();
+      handleCloseLogout();
       await sweetTopSuccessAlert("success", 700);
       setAuthMember(null);
     } catch(err) {
       console.log(err);
       sweetErrorHandling(Messages.error1);
+      handleCloseLogout();
     }
   };
 

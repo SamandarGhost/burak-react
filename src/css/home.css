@@ -1,6 +1,7 @@
 .homepage {
     width: 100%;
     height: auto;
+    background-color: #F8F8FF;
 }
 
 /* * Statistics * */
@@ -285,8 +286,18 @@
     min-width: 305px;
     height: 302px;
     margin: 70px 10px 2px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     border-radius: 0.5rem;
     background: #FFFFFF;
+}
+
+.homepage .cards-frame .card .image {
+  min-width: 305px;
+  height: 275px;
+  border-radius: 0.5rem;
 }
 
 .homepage .cards-frame .card .card-name {
