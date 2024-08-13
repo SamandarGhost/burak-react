@@ -15,7 +15,7 @@ import { serverApi } from "../../lib/config";
 const pausedOrdersRetriever = createSelector(
     retrievePausedOrders,
     (pausedOrders) => ({pausedOrders})
-) 
+);
 
 
 export default function PausedOrders() {
