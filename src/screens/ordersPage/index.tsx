@@ -18,6 +18,7 @@ import { useGlobals } from "../../app/hooks/useGlobals";
 import { useHistory } from "react-router-dom";
 import { MemberType } from "../../lib/enums/member.enum";
 import "../../css/order.css";
+import { serverApi } from "../../lib/config";
 
 
 
@@ -86,7 +87,7 @@ export default function OrdersPage() {
           <Box className={"order-info-box"}>
             <Box className={"member-box"}>
               <div className={"order-user-img"}>
-                <img src={authMember?.memberImage ? authMember.memberImage : "/icons/default-user.svg"}
+                <img src={ authMember?.memberImage ? `${serverApi}/${authMember.memberImage}` : "/icons/default-user.svg"}
                      className={"order-user-avatar"} />
                   <div className={"order-user-prof"} >
                       <img src={authMember?.memberType === MemberType.RESTAURANT 
@@ -101,7 +102,7 @@ export default function OrdersPage() {
             <Box className={"order-user-address"}>
               <div style={{display: "flex"}}>
                 <LocationOnIcon />
-                {authMember?.memberAdress ? authMember?.memberAdress : "no address"}
+                {authMember?.memberAdress ? authMember?.memberAdress : "Do not exist"}
               </div>
             </Box>
           </Box>
