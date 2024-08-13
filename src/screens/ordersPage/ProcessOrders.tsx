@@ -66,7 +66,7 @@ const finishedOrderHandler = async (e: T) => {
                                     const product: Product = order.productData.filter(
                                         (ele: Product) => item.productId === ele._id
                                     )[0];
-                                    const imagePath = `${serverApi}/${product.productImages[0]}`;
+                                    const imagePath = `${serverApi}/${product?.productImages[0]}`;
                                     return(
                                         <Box key={item._id} className={"orders-name-price"}>
                                             <img 

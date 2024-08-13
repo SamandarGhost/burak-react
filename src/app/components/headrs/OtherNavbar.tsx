@@ -79,7 +79,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                             Login
                     </Button>
                     </Box>) : (<img className="user-avatar"
-                     src={ authMember?.memberImage ? `${serverApi}/${authMember.memberImage}` : "/icons/default-user.svg"}
+                     src={ authMember?.memberImage ? `${serverApi}/${authMember?.memberImage}` : "/icons/default-user.svg"}
                     aria-haspaup={"true"} 
                     onClick={handleLogoutClick}
                     />)}
