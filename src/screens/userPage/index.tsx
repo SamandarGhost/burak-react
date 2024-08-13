@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { useGlobals } from "../../app/hooks/useGlobals";
 import "../../css/userPage.css";
 import { MemberType } from "../../lib/enums/member.enum";
+import { serverApi } from "../../lib/config";
 
 export default function UserPage() {
   const history = useHistory();
@@ -36,7 +37,7 @@ export default function UserPage() {
               >
                 <div className={"order-user-img"}>
                   <img
-                    src={authMember?.memberImage ? authMember.memberImage : "/icons/default-user.svg"}
+                     src={ authMember?.memberImage ? `${serverApi}/${authMember.memberImage}` : "/icons/default-user.svg"}
                     className={"order-user-avatar"}
                   />
                   <div className={"order-user-icon-box"}>
